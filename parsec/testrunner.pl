@@ -12,7 +12,7 @@ my $PATH = $ENV{"PATH"};
 die "Initialize env vars !" if (!defined $HOME);
 
 my $kernel = "/usr/src/linux-3.13.7/";
-my @sources = qw(test1 test2 test4 test8 test16);
+my @sources = qw(xxorr1 xxorr2 xxorr4 xxorr8 xxorr16);
 my $srcpath = "$HOME/xnrheaders";
 my $destpath = "$kernel/include/linux/xxorr_types.h";
 my $replacefile = "test.txt";
@@ -41,7 +41,6 @@ system $parsecrun;
 foreach my $file (@sources){
     next if (! -f "$srcpath/$file");
     say "found $file";
-    #rebuild the kernel with the modified size
     chdir $kernel;
     system("cp","-f","$srcpath/$file","$destpath");
     system("mv","$srcpath/$file","$srcpath/$file.tmp");
@@ -56,4 +55,10 @@ foreach my $file (@sources){
     print("Shutting down the system now\n");
     sleep 3;
     system("shutdown","-r","now");
+    break;
+}
+
+while(1){
+    sleep 10;
+    say "shutting down";
 }
